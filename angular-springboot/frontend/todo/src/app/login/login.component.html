@@ -1,0 +1,22 @@
+<div class="container">
+    <h3>Login</h3>
+    <br/>
+</div>
+
+<div class="container">
+    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+    <!-- *ngIf  angular directive-->
+
+    <div>
+        <!-- User Name : <input type="text" name="username" value={{username}}> interpolation -->
+        User Name : <input type="text" name="username" [(ngModel)]=username>
+        <!--- 2 way data binding -->
+
+        Password : <input type="password" name="password" [(ngModel)]=password>
+        <!--event binding (event is click in this example)-->
+        <!-- <button>Login</button> -->
+
+        <!-- <button (click)=handleLogin() class="btn btn-success">Login</button> -->
+        <button (click)=handleBasicAuthLogin() class="btn btn-success">Login</button>
+    </div>
+</div>
