@@ -7,30 +7,23 @@ export class HardcodedAuthenticationService {
 
   constructor() { }
 
-  authenticate(username: string, password: string) {
-    console.log(`HardcodedAuthenticationService authenticate - username: ${username} password: ${password}`);
-    
-    if (username === 'John' && password === 'sloop') {
-      sessionStorage.setItem(`{$AUTHENTICATED_USER}`, username);
-      console.log(`HardcodedAuthenticationService authenticate - ${username} success`);
+  authenticate(username, password) {
+    //console.log('before ' + this.isUserLoggedIn());
+    if(username==="in28minutes" && password === 'dummy') {
+      sessionStorage.setItem('authenticaterUser', username);
+      //console.log('after ' + this.isUserLoggedIn());
       return true;
     }
-    else {
-      console.log(`HardcodedAuthenticationService authenticate - ${username} failure`);
-      return false;
-    }
+    return false;
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem(`{$AUTHENTICATED_USER}`)
-    return !(user === null);
+    let user = sessionStorage.getItem('authenticaterUser')
+    return !(user === null)
   }
 
   logout(){
-    let user = sessionStorage.getItem(`{$AUTHENTICATED_USER}`)
-    sessionStorage.removeItem(`{$AUTHENTICATED_USER}`);
-    console.log(`hardcodedAuthenticationService logout - removed authenticated user: ${user}`)
-
+    sessionStorage.removeItem('authenticaterUser')
   }
 
 }

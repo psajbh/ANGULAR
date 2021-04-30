@@ -1,24 +1,23 @@
+import { TodoComponent } from './todo/todo.component';
+import { RouteGuardService } from './service/route-guard.service';
+import { LogoutComponent } from './logout/logout.component';
+import { ListTodosComponent } from './list-todos/list-todos.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorComponent } from './error/error.component';
-import { ListTodosComponent } from './list-todos/list-todos.component';
-import { LogoutComponent } from './logout/logout.component';
-import { RouteGuardService } from './service/route-guard.service';
-import { TodoComponent } from './todo/todo.component';
 
+// welcome 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LoginComponent  },//canActivate, RouteGuardService
   { path: 'login', component: LoginComponent },
-  
-  { path: 'welcome/:name', component: WelcomeComponent, canActivate:[RouteGuardService] }, 
+  { path: 'welcome/:name', component: WelcomeComponent, canActivate:[RouteGuardService]},
   { path: 'todos', component: ListTodosComponent, canActivate:[RouteGuardService] },
   { path: 'logout', component: LogoutComponent, canActivate:[RouteGuardService] },
   { path: 'todos/:id', component: TodoComponent, canActivate:[RouteGuardService] },
-  // **any path entry not indicated here will go to ErrorComponent
-  { path: '**', component: ErrorComponent }
 
+  { path: '**', component: ErrorComponent }
 ];
 
 @NgModule({

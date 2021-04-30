@@ -1,8 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BasicAuthenticationService } from '../basic-authentication-service';
-import { API_URL } from 'src/app/app.constants';
 
+export class HelloWorldBean {
+  constructor(public message:string){ }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,43 +11,18 @@ import { API_URL } from 'src/app/app.constants';
 export class WelcomeDataService {
 
   constructor(
-    private http: HttpClient,
-    //private basicAuthenticationService: BasicAuthenticationService
-
+    private http:HttpClient
   ) { }
 
   executeHelloWorldBeanService() {
-    console.log('executeHellowWorldService')
-    return this.http.get<HelloWorldBean>(`${API_URL}/hello-world-bean`);
+    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean');
+    //console.log("Execute Hello World Bean Service")
+  }
+  //http://localhost:8080/hello-world/path-variable/in28minutes
+
+  executeHelloWorldServiceWithPathVariable(name) {
+    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`);
+    //console.log("Execute Hello World Bean Service")
   }
 
-  executeHelloWorldBeanServiceWithPathVariable(name) {
-    console.log('executeHelloWorldBeanServiceWithPathVariable - name: ' +name);
-
-    
-    //let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-
-    //  let headers = new HttpHeaders({
-    //     Authorization: basicAuthHeaderString
-    //  })
-
-    return this.http.get<HelloWorldBean>(`${API_URL}/hello-world-bean/path-variable/${name}`);
-    
-  }
-
-  //note basic authentiation encoding provided by system using window.btoa(...)  windows base 64 encoding
-  //  createBasicAuthenticationHttpHeader(){
-  //   console.log('createBasicAuthenticationHttpHeader');
-  //    let username = 'John';
-  //    let password = 'sloop';
-  //    let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
-  //    return basicAuthHeaderString;
-  //  }
-
 }
-
-export class HelloWorldBean {
-  constructor(public message: string) { }
-
-}
-
