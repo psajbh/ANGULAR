@@ -1,4 +1,4 @@
-package com.jhart.todo;
+package com.jhart.model;
 
 import java.util.Date;
 
